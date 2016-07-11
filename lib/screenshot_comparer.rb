@@ -16,6 +16,8 @@ module ScreenshotComparer
   private
 
   def comparer(current_screenshots, sample_screenshots, out_folder)
+    raise("File '#{current_screenshots}' is not exists!") unless File.exists?(current_screenshots)
+    raise("File '#{sample_screenshots}' is not exists!") unless File.exists?(sample_screenshots)
     FileUtils.mkdir_p(out_folder) unless File.directory?(out_folder)
     WatirCats.configure :output_dir => out_folder
     comp = WatirCats::Comparer.new(File.dirname(current_screenshots), File.dirname(sample_screenshots))
